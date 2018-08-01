@@ -87,6 +87,7 @@ public class SublimeDatePicker extends FrameLayout {
     private LinearLayout llHeaderDateRangeCont;
     private TextView tvHeaderDateStart;
     private TextView tvHeaderDateEnd;
+    private TextView tvPickerTitle;
     private ImageView ivHeaderDateReset;
 
     // Picker views.
@@ -116,6 +117,7 @@ public class SublimeDatePicker extends FrameLayout {
     private int mCurrentlyActivatedRangeItem = RANGE_ACTIVATED_NONE;
 
     private boolean mIsInLandscapeMode;
+    private boolean canPickRange;
 
     public SublimeDatePicker(Context context) {
         this(context, null);
@@ -132,7 +134,7 @@ public class SublimeDatePicker extends FrameLayout {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public SublimeDatePicker(Context context, AttributeSet attrs,
-                                     int defStyleAttr, int defStyleRes) {
+                             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initializeLayout(attrs, defStyleAttr, defStyleRes);
     }
@@ -180,6 +182,7 @@ public class SublimeDatePicker extends FrameLayout {
         tvHeaderDateStart = (TextView) header.findViewById(R.id.tv_header_date_start);
         tvHeaderDateStart.setOnClickListener(mOnHeaderClickListener);
         tvHeaderDateEnd = (TextView) header.findViewById(R.id.tv_header_date_end);
+        tvPickerTitle = (TextView) header.findViewById(R.id.picker_title);
         tvHeaderDateEnd.setOnClickListener(mOnHeaderClickListener);
         ivHeaderDateReset = (ImageView) header.findViewById(R.id.iv_header_date_reset);
         ivHeaderDateReset.setOnClickListener(mOnHeaderClickListener);
@@ -330,6 +333,7 @@ public class SublimeDatePicker extends FrameLayout {
         public void onDateRangeSelectionStarted(@NonNull SelectedDate selectedDate) {
             mCurrentDate = new SelectedDate(selectedDate);
             onDateChanged(false, false, false);
+            switchToDateRangeView();
         }
 
         @Override
@@ -515,10 +519,10 @@ public class SublimeDatePicker extends FrameLayout {
      * Initialize the state. If the provided values designate an inconsistent
      * date the values are normalized before updating the spinners.
      *
-     * @param selectedDate  The initial date or date range.
-     * @param canPickRange  Enable/disable date range selection
-     * @param callback      How user is notified date is changed by
-     *                      user, can be null.
+     * @param selectedDate The initial date or date range.
+     * @param canPickRange Enable/disable date range selection
+     * @param callback     How user is notified date is changed by
+     *                     user, can be null.
      */
     //public void init(int year, int monthOfYear, int dayOfMonth, boolean canPickRange,
     public void init(SelectedDate selectedDate, boolean canPickRange,
@@ -530,6 +534,7 @@ public class SublimeDatePicker extends FrameLayout {
 
         mDayPickerView.setCanPickRange(canPickRange);
         mDateChangedListener = callback;
+        this.canPickRange = canPickRange;
 
         onDateChanged(false, false, true);
     }
@@ -592,7 +597,7 @@ public class SublimeDatePicker extends FrameLayout {
     private void switchToSingleDateView() {
         mCurrentlyActivatedRangeItem = RANGE_ACTIVATED_NONE;
 
-        ivHeaderDateReset.setVisibility(View.GONE);
+        ivHeaderDateReset.setVisibility(View.INVISIBLE);
         llHeaderDateRangeCont.setVisibility(View.INVISIBLE);
         llHeaderDateSingleCont.setVisibility(View.VISIBLE);
 
@@ -820,6 +825,10 @@ public class SublimeDatePicker extends FrameLayout {
         if (mValidationCallback != null) {
             mValidationCallback.onDatePickerValidationChanged(valid);
         }
+    }
+
+    public void setTitle(String title) {
+        tvPickerTitle.setText(title);
     }
 
     /**

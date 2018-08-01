@@ -556,7 +556,7 @@ public class SublimePicker extends FrameLayout
             //        mOptions.canPickDateRange(),
             //        this);
             mDatePicker.init(mOptions.getDateParams(), mOptions.canPickDateRange(), this);
-
+            mDatePicker.setTitle(mOptions.getTitle());
             long[] dateRange = mOptions.getDateRange();
 
             if (dateRange[0] /* min date */ != Long.MIN_VALUE) {
@@ -633,9 +633,9 @@ public class SublimePicker extends FrameLayout
     public void onDateChanged(SublimeDatePicker view, SelectedDate selectedDate) {
         // TODO: Consider removing this propagation of date change event altogether
         //mDatePicker.init(selectedDate.getStartDate().get(Calendar.YEAR),
-                //selectedDate.getStartDate().get(Calendar.MONTH),
-                //selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH),
-                //mOptions.canPickDateRange(), this);
+        //selectedDate.getStartDate().get(Calendar.MONTH),
+        //selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH),
+        //mOptions.canPickDateRange(), this);
         mDatePicker.init(selectedDate, mOptions.canPickDateRange(), this);
     }
 

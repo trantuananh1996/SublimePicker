@@ -32,6 +32,16 @@ import java.util.Locale;
  * Options to initialize 'SublimePicker'
  */
 public class SublimeOptions implements Parcelable {
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public enum Picker {DATE_PICKER, TIME_PICKER, REPEAT_OPTION_PICKER, INVALID}
 
     // make DatePicker available
@@ -353,7 +363,7 @@ public class SublimeOptions implements Parcelable {
         dest.writeByte((byte) (mCanPickDateRange ? 1 : 0));
     }
 
-    public static final Parcelable.Creator<SublimeOptions> CREATOR = new Parcelable.Creator<SublimeOptions>() {
+    public static final Creator<SublimeOptions> CREATOR = new Creator<SublimeOptions>() {
         public SublimeOptions createFromParcel(Parcel in) {
             return new SublimeOptions(in);
         }
