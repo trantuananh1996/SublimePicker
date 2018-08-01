@@ -459,6 +459,7 @@ class DayPickerView extends ViewGroup {
         mViewPager.setCurrentItem(position, false);
     }
 
+
     public interface ProxyDaySelectionEventListener {
         void onDaySelected(DayPickerView view, Calendar day);
 
