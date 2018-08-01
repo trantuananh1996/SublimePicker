@@ -19,6 +19,7 @@ package com.appeaser.sublimepickerlibrary.datepicker;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
+import android.os.Vibrator;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -274,6 +275,8 @@ class DayPickerViewPager extends ViewPager {
                     }
 
                     mIsLongPressed = true;
+                    Vibrator vibe = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    if (vibe != null) vibe.vibrate(60);
                     mDayPickerPagerAdapter.onDateRangeSelectionStarted(mTempSelectedDate);
                 }
             }
