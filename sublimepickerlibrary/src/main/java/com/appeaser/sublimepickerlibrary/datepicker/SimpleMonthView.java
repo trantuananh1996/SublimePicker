@@ -28,9 +28,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
-import android.support.v4.widget.ExploreByTouchHelper;
 import android.text.TextPaint;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
@@ -40,6 +37,10 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
+import androidx.customview.widget.ExploreByTouchHelper;
 
 import com.appeaser.sublimepickerlibrary.R;
 import com.appeaser.sublimepickerlibrary.common.DateTimePatternHelper;
@@ -321,13 +322,13 @@ class SimpleMonthView extends View {
 
         mMonthPaint.setAntiAlias(true);
         mMonthPaint.setTextSize(monthTextSize);
-        mMonthPaint.setTypeface(Typeface.create(monthTypeface, 0));
+        mMonthPaint.setTypeface(Typeface.create(monthTypeface, Typeface.NORMAL));
         mMonthPaint.setTextAlign(Paint.Align.CENTER);
         mMonthPaint.setStyle(Paint.Style.FILL);
 
         mDayOfWeekPaint.setAntiAlias(true);
         mDayOfWeekPaint.setTextSize(dayOfWeekTextSize);
-        mDayOfWeekPaint.setTypeface(Typeface.create(dayOfWeekTypeface, 0));
+        mDayOfWeekPaint.setTypeface(Typeface.create(dayOfWeekTypeface, Typeface.NORMAL));
         mDayOfWeekPaint.setTextAlign(Paint.Align.CENTER);
         mDayOfWeekPaint.setStyle(Paint.Style.FILL);
 
@@ -342,7 +343,7 @@ class SimpleMonthView extends View {
 
         mDayPaint.setAntiAlias(true);
         mDayPaint.setTextSize(dayTextSize);
-        mDayPaint.setTypeface(Typeface.create(dayTypeface, 0));
+        mDayPaint.setTypeface(Typeface.create(dayTypeface, Typeface.NORMAL));
         mDayPaint.setTextAlign(Paint.Align.CENTER);
         mDayPaint.setStyle(Paint.Style.FILL);
     }
@@ -585,13 +586,13 @@ class SimpleMonthView extends View {
 
                 switch (bgShape) {
                     case DRAW_RECT_WITH_CURVE_ON_LEFT:
-                        int leftRectArcLeft = (int)(colCenterRtl - horDistFromCenter) % 2 == 1 ?
-                                (int)(colCenterRtl - horDistFromCenter) + 1
-                                : (int)(colCenterRtl - horDistFromCenter);
+                        int leftRectArcLeft = (int) (colCenterRtl - horDistFromCenter) % 2 == 1 ?
+                                (int) (colCenterRtl - horDistFromCenter) + 1
+                                : (int) (colCenterRtl - horDistFromCenter);
 
-                        int leftRectArcRight = (int)(colCenterRtl + horDistFromCenter) % 2 == 1 ?
-                                (int)(colCenterRtl + horDistFromCenter) + 1
-                                : (int)(colCenterRtl + horDistFromCenter);
+                        int leftRectArcRight = (int) (colCenterRtl + horDistFromCenter) % 2 == 1 ?
+                                (int) (colCenterRtl + horDistFromCenter) + 1
+                                : (int) (colCenterRtl + horDistFromCenter);
 
                         RectF leftArcRect = new RectF(leftRectArcLeft,
                                 rowCenter - rowHeight / 2f + mPaddingRangeIndicator,
@@ -607,13 +608,13 @@ class SimpleMonthView extends View {
                                 mDayRangeSelectorPaint);
                         break;
                     case DRAW_RECT_WITH_CURVE_ON_RIGHT:
-                        int rightRectArcLeft = (int)(colCenterRtl - horDistFromCenter) % 2 == 1 ?
-                                (int)(colCenterRtl - horDistFromCenter) + 1
-                                : (int)(colCenterRtl - horDistFromCenter);
+                        int rightRectArcLeft = (int) (colCenterRtl - horDistFromCenter) % 2 == 1 ?
+                                (int) (colCenterRtl - horDistFromCenter) + 1
+                                : (int) (colCenterRtl - horDistFromCenter);
 
-                        int rightRectArcRight = (int)(colCenterRtl + horDistFromCenter) % 2 == 1 ?
-                                (int)(colCenterRtl + horDistFromCenter) + 1
-                                : (int)(colCenterRtl + horDistFromCenter);
+                        int rightRectArcRight = (int) (colCenterRtl + horDistFromCenter) % 2 == 1 ?
+                                (int) (colCenterRtl + horDistFromCenter) + 1
+                                : (int) (colCenterRtl + horDistFromCenter);
 
                         RectF rightArcRect = new RectF(rightRectArcLeft,
                                 rowCenter - rowHeight / 2f + mPaddingRangeIndicator,

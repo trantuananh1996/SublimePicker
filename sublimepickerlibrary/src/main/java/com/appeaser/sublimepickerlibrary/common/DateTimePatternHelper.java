@@ -1,7 +1,8 @@
 package com.appeaser.sublimepickerlibrary.common;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.appeaser.sublimepickerlibrary.datepicker.SublimeDatePicker;
 import com.appeaser.sublimepickerlibrary.timepicker.SublimeTimePicker;
