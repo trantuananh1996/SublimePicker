@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
@@ -12,11 +12,6 @@ apply plugin: 'com.android.library'
 
 
 apply plugin: 'com.github.dcendents.android-maven'
-
-// Force character encoding in case the workspace was not set up correctly
-//tasks.withType(Javadoc) {
-    //options.encoding = 'x-UTF-16LE-BOM'
-//}
 
 ext {
     bintrayRepo = 'maven'
@@ -31,7 +26,7 @@ ext {
     siteUrl = 'https://github.com/vikramkakkar/SublimePicker'
     gitUrl = 'https://github.com/vikramkakkar/SublimePicker.git'
 
-    libraryVersion = '2.1.1'
+    libraryVersion = '2.1.2'
 
     developerId = 'vikramkakkar'
     developerName = 'Vikram Kakkar'
@@ -50,7 +45,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 4
-        versionName "2.1.1"
+        versionName "2.1.2"
     }
     buildTypes {
         release {
