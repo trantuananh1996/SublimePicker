@@ -607,6 +607,7 @@ public class SublimeDatePicker extends FrameLayout {
     }
 
     private void switchToDateRangeView() {
+        Log.d(getClass().getSimpleName(), "switchToDateRangeView() called");
         if (mCurrentlyActivatedRangeItem == RANGE_ACTIVATED_NONE) {
             mCurrentlyActivatedRangeItem = RANGE_ACTIVATED_START;
         }

@@ -76,7 +76,7 @@ class DayPickerView extends ViewGroup {
         super(SUtils.createThemeWrapper(context, R.attr.sublimePickerStyle,
                 R.style.SublimePickerStyleLight, defStyleAttr,
                 R.style.DayPickerViewStyle), attrs);
-
+        Log.d(getClass().getSimpleName(), "DayPickerView() called with: context = [" + context + "], attrs = [" + attrs + "], defStyleAttr = [" + defStyleAttr + "]");
         context = getContext();
 
         mAccessibilityManager = (AccessibilityManager) context.getSystemService(
@@ -276,26 +276,28 @@ class DayPickerView extends ViewGroup {
         final int width = right - left;
         final int height = bottom - top;
         mViewPager.layout(0, 0, width, height);
+        Log.d(getClass().getSimpleName(), "onLayout() called with: changed = [" + changed + "], left = [" + left + "], top = [" + top + "], right = [" + right + "], bottom = [" + bottom + "]");
+        if (mViewPager.getChildAt(0) != null) {
+            final SimpleMonthView monthView = (SimpleMonthView) mViewPager.getChildAt(0)
+                    .findViewById(R.id.month_view);
+            final int monthHeight = monthView.getMonthHeight();
+            final int cellWidth = monthView.getCellWidth();
 
-        final SimpleMonthView monthView = (SimpleMonthView) mViewPager.getChildAt(0)
-                .findViewById(R.id.month_view);
-        final int monthHeight = monthView.getMonthHeight();
-        final int cellWidth = monthView.getCellWidth();
+            // Vertically center the previous/next buttons within the month
+            // header, horizontally center within the day cell.
+            final int leftDW = leftButton.getMeasuredWidth();
+            final int leftDH = leftButton.getMeasuredHeight();
+            final int leftIconTop = monthView.getPaddingTop() + (monthHeight - leftDH) / 2;
+            final int leftIconLeft = monthView.getPaddingLeft() + (cellWidth - leftDW) / 2;
+            leftButton.layout(leftIconLeft, leftIconTop, leftIconLeft + leftDW, leftIconTop + leftDH);
 
-        // Vertically center the previous/next buttons within the month
-        // header, horizontally center within the day cell.
-        final int leftDW = leftButton.getMeasuredWidth();
-        final int leftDH = leftButton.getMeasuredHeight();
-        final int leftIconTop = monthView.getPaddingTop() + (monthHeight - leftDH) / 2;
-        final int leftIconLeft = monthView.getPaddingLeft() + (cellWidth - leftDW) / 2;
-        leftButton.layout(leftIconLeft, leftIconTop, leftIconLeft + leftDW, leftIconTop + leftDH);
-
-        final int rightDW = rightButton.getMeasuredWidth();
-        final int rightDH = rightButton.getMeasuredHeight();
-        final int rightIconTop = monthView.getPaddingTop() + (monthHeight - rightDH) / 2;
-        final int rightIconRight = width - monthView.getPaddingRight() - (cellWidth - rightDW) / 2;
-        rightButton.layout(rightIconRight - rightDW, rightIconTop,
-                rightIconRight, rightIconTop + rightDH);
+            final int rightDW = rightButton.getMeasuredWidth();
+            final int rightDH = rightButton.getMeasuredHeight();
+            final int rightIconTop = monthView.getPaddingTop() + (monthHeight - rightDH) / 2;
+            final int rightIconRight = width - monthView.getPaddingRight() - (cellWidth - rightDW) / 2;
+            rightButton.layout(rightIconRight - rightDW, rightIconTop,
+                    rightIconRight, rightIconTop + rightDH);
+        }
     }
 
     public void setDayOfWeekTextAppearance(int resId) {
@@ -412,6 +414,7 @@ class DayPickerView extends ViewGroup {
      * Handles changes to date range.
      */
     private void onRangeChanged() {
+        Log.d(getClass().getSimpleName(), "onRangeChanged() called");
         mAdapter.setRange(mMinDate, mMaxDate);
 
         // Changing the min/max date changes the selection position since we
